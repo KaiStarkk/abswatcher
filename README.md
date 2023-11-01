@@ -62,7 +62,7 @@ npm install -g abswatcher
 ```
 
 If you did not install Node.js, and don't want to bother installing it, you can: 
-* download [abswatcher.exe](https://github.com/mikiher/abswatcher/releases/latest/download/abswatcher.exe)
+* download [abswatcher.exe](https://github.com/mikiher/abswatcher/releases/download/0.1.0/abswatcher.exe)
 * put it in whatever directory you like
 * add that directory to your system's PATH environemnt variable.
 
