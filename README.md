@@ -14,7 +14,34 @@ For example, if you move some new audiobook files to one of the library folders,
 
 If you installed Audiobookshelf on Windows as a Docker container (by following this [guide](https://www.audiobookshelf.org/guides/docker-install)), you might find out that your library watchers are not working as intended, and that ABS does not get notified when changes happens in one of your libraries. 
 
-<details><summary>Why are they not working?</summary> test test test</details>
+<details><summary>Why are the ABS watchers not working?</summary>
+In most cases, Docker Desktop on Windows is installed on WSL (Windows Subsystem for Linux) 2. 
+
+This means that your Docker containers run on an isloated Linux virtual machine, so by default they cannot see your Windows drives and folders. In order to make Windows folders visible to Your docker container, you define them as Docker volumes. 
+
+These can be defined, for example, in the Docker Compose configuration (as explained in the ABS Windows installation guide), like this:
+
+```sh
+version: "3.7"
+services:
+  audiobookshelf:
+    image: ghcr.io/advplyr/audiobookshelf:latest
+    ports:
+      - 13378:80
+    volumes:
+      - F:\Audiobooks:/audiobooks
+      - F:\Audiobookshelf\config:/config
+      - F:\Audiobookshelf\metadara:/metadata
+```
+
+In the example above, /audiobooks is defined as a volume that maps to the Windows folder F:\audiobooks.
+
+This way, you can create an ABS library that points to the /audiobooks folder, which maps to F:\audiobooks where all your books are kept. ABS can access, read, and write to this folder like every other folder. 
+
+Watching for changes, however, will not work in most cases, because it relies on notifications from the operating system hosting the watched folder (Windows, in our case), and those notifications are not passed from Windows to WSL. 
+
+So, in our example, any changes made to F:\audiobooks by any Windows application, will not be visible to the ABS library watcher (running on WSL).
+</details>
 
 
 To fix this issue, you need to run ABS Watcher on your Windows system.
@@ -25,8 +52,6 @@ To fix this issue, you need to run ABS Watcher on your Windows system.
     * [Node.js](https://nodejs.org/en) 18 or above (optional)
 * On Docker
     * [Audiobookshelf](https://www.audiobookshelf.org/) 2.5.0 or above, installed as a Docker container according to [this guide](https://www.audiobookshelf.org/guides/docker-install)
-
-Without any changes, this app is connected to a Contentful space with read-only access. To experience the full end-to-end Contentful experience, you need to connect the app to a Contentful space with read _and_ write access. This enables you to see how content editing in the Contentful web app works and how content changes propagate to this app.
 
 ## Installation
 
