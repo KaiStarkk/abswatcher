@@ -11,7 +11,7 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}/lib/index.mjs",
+            "program": "${workspaceFolder}/lib/index.js",
             "args": [
                 "--username", "<username>",
                 "--password", "<password>",

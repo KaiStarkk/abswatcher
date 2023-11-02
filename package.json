@@ -4,8 +4,9 @@
   "description": "An external file watcher for Audiobookshelf.",
   "main": "lib/index.js",
   "bin": "lib/index.js",
+  "type": "module",
   "scripts": {
-    "start": "node lib/index.mjs",
+    "start": "node lib/index.js",
     "build": "rollup --config rollup.config.mjs && pkg -d -t node18-win-x64 -o dist/abswatcher.exe dist/index.js"
   },
   "keywords": [
