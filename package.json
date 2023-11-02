@@ -5,6 +5,10 @@
   "main": "lib/index.js",
   "bin": "lib/index.js",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mikiher/abswatcher.git"
+  },
   "scripts": {
     "start": "node lib/index.js",
     "build": "rollup --config rollup.config.mjs && pkg -d -t node18-win-x64 -o dist/abswatcher.exe dist/index.js"
