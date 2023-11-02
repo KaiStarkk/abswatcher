@@ -77,7 +77,7 @@ Options:
   -u, --username   Audiobookshelf username                   [string] [required]
   -p, --password   Audiobookshelf password                   [string] [required]
   -s, --server     URL of the Audiobookshelf server
-                                    [string] [default: "http://127.0.0.1/13378"]
+                                    [string] [default: "http://127.0.0.1:13378"]
   -c, --container  Name of the Audiobookshelf Docker container
                            [string] [default: "audiobookshelf-audiobookshelf-1"]
 ```
