@@ -3,7 +3,7 @@ import json from '@rollup/plugin-json';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 
 export default {
-  input: 'lib/index.mjs',
+  input: 'lib/index.js',
   output: {
     dir: 'dist',
     format: 'cjs'
