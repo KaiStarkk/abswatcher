@@ -1,6 +1,6 @@
 {
   "name": "abswatcher",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "An external file watcher for Audiobookshelf.",
   "main": "lib/index.js",
   "bin": {
