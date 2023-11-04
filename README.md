@@ -1,6 +1,8 @@
 ## What is ABS Watcher?
 
-This small Node app is an external library watcher for Audiobookshelf (a.k.a ABS).
+This small Node CLI app is an external library watcher for Audiobookshelf (a.k.a ABS). 
+
+It's intended for use on Windows, alongside ABS Windows Docker installations.
 
 ### What is a watcher?
 
@@ -17,7 +19,7 @@ If you installed Audiobookshelf on Windows as a Docker container (by following t
 <details><summary>Why are the ABS watchers not working?</summary>
 In most cases, Docker Desktop on Windows is installed on WSL (Windows Subsystem for Linux) 2. 
 
-This means that your Docker containers run on an isloated Linux virtual machine, so by default they cannot see your Windows drives and folders. In order to make Windows folders visible to Your docker container, you define them as Docker volumes. 
+This means that your Docker containers run on an isloated Linux virtual machine, so by default they cannot see your Windows drives and folders. In order to make Windows folders visible to your docker container, you define them as Docker volumes. 
 
 These can be defined, for example, in the Docker Compose configuration (as explained in the ABS Windows installation guide), like this:
 
@@ -38,18 +40,30 @@ In the example above, /audiobooks is defined as a volume that maps to the Window
 
 This way, you can create an ABS library that points to the /audiobooks folder, which maps to F:\audiobooks where all your books are kept. ABS can access, read, and write to this folder like every other folder. 
 
-Watching for changes, however, will not work in most cases, because it relies on notifications from the operating system hosting the watched folder (Windows, in our case), and those notifications are not passed from Windows to WSL. 
+Watching for changes, however, will not work in most cases, because it relies on notifications from the operating system hosting the watched folder (Windows, in our case), and those notifications are not passed from Windows to WSL 2.
 
-So, in our example, any changes made to F:\audiobooks by any Windows application, will not be visible to the ABS library watcher (running on WSL).
+So, in our example, any changes made to F:\audiobooks by any Windows application, will not be visible to the ABS library watcher (running on WSL 2).
 </details>
 
 
 To fix this issue, you need to run ABS Watcher on your Windows system.
 
+### How does ABS Watcher work?
+
+ABS watcher essentially mimics the internal (non-functioning) Audiobookshelf watcher, by watching the same folders on the Windows system, and sending notifications to ABS via API (introduced in ABS v2.5.0) when it detects changes. 
+
+ABS Watcher:
+1. Inspects your ABS Docker container to learn which Windows folders are mapped to which Docker folders.
+2. Logs in to your ABS server.
+3. Reads your ABS libraries metadata, which includes the Docker folders that comprise each library.
+4. Translates library Docker folders into Windows folders, using the mapping from step 1.
+5. Sets up a watch for changes on all library Windows folders.
+6. Sends a notification to ABS whenever a file is added, removed, or renamed in one of the watched folders.
+
 ## Requirements
 * On your Windows system:
     * [Docker Desktop](https://www.docker.com/products/docker-desktop/)
-    * [Node.js](https://nodejs.org/en) 18 or above (optional)
+    * _(optional)_ [Node.js](https://nodejs.org/en/download) for Windows, version 18 or above
 * On Docker
     * [Audiobookshelf](https://www.audiobookshelf.org/) 2.5.0 or above, installed as a Docker container according to [this guide](https://www.audiobookshelf.org/guides/docker-install)
 
@@ -62,7 +76,8 @@ npm install -g abswatcher
 ```
 
 If you did not install Node.js, and don't want to bother installing it, you can: 
-* download [abswatcher.exe](https://github.com/mikiher/abswatcher/releases/download/0.3.0/abswatcher.exe)
+* download [abswatcher.exe](https://github.com/mikiher/abswatcher/releases/download/0.3.0/abswatcher.exe) 
+  * abswatcher.exe is the ABS Watcher Node.js app packaged with a Node.js runtime that runs it
 * put it in whatever directory you like
 * add that directory to your system's PATH environemnt variable.
 
