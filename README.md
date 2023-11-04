@@ -16,7 +16,7 @@ For example, if you move some new audiobook files to one of the library folders,
 
 If you installed Audiobookshelf on Windows as a Docker container (by following this [guide](https://www.audiobookshelf.org/guides/docker-install)), you might find out that your library watchers are not working as intended, and that ABS does not get notified when changes happens in one of your libraries. 
 
-<details><summary>Why are the ABS watchers not working?</summary>
+<details><summary>Why are the internal Audiobookshelf watchers not working?</summary>
 In most cases, Docker Desktop on Windows is installed on WSL (Windows Subsystem for Linux) 2. 
 
 This means that your Docker containers run on an isloated Linux virtual machine, so by default they cannot see your Windows drives and folders. In order to make Windows folders visible to your docker container, you define them as Docker volumes. 
