@@ -117,22 +117,19 @@ Precompiled binaries are not currently available for the Linux version.
 ## Usage
 
 ```console
-Usage: abswatcher --username <username> --password <password> [-c container | -m path-mappings]
+Usage: abswatcher --username <username> --password <password> [-c container | -n path-mappings]
 
 Options:
-      --help          Show help                                           [boolean]
-      --version       Show version number                                 [boolean]
-
-  -u, --username      Audiobookshelf username                   [string] [required]
-  -p, --password      Audiobookshelf password                   [string] [required]
-  -s, --server        URL of the Audiobookshelf server          [string] [required]
-                                                [default: "http://127.0.0.1:13378"]
-
-  -c, --container     Name of the Audiobookshelf Docker container          [string]
-                                                   [required if -m is not provided]
-
-  -m, --path-mappings `/local/path=/remote/path` folder pairs              [string]
-                          (comma-separated)        [required if -c is not provided]
+      --help       Show help                                           [boolean]
+      --version    Show version number                                 [boolean]
+  -u, --username   Audiobookshelf username                   [string] [required]
+  -p, --password   Audiobookshelf password                   [string] [required]
+  -s, --server     URL of the Audiobookshelf server
+                                    [string] [default: "http://127.0.0.1:13378"]
+  -c, --container  Docker mode - name of the Audiobookshelf Docker container
+                                                                        [string]
+  -n, --network    Network mode - fileshare C:\Local=/remote path mappings
+                   (comma-separated)                                    [string]
 ```
 
 ### username and password
