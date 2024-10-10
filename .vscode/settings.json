@@ -1,0 +1,3 @@
+{
+  "editor.formatOnSave": false // Recommend removing this one a linter and formatter are set up
+}
