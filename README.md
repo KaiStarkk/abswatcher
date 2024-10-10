@@ -123,7 +123,7 @@ Options:
       --help       Show help                                           [boolean]
       --version    Show version number                                 [boolean]
   -u, --username   Audiobookshelf username                   [string] [required]
-  -p, --password   Audiobookshelf password                   [string] [required]
+  -p, --password   Audiobookshelf password                              [string]
   -s, --server     URL of the Audiobookshelf server
                                     [string] [default: "http://127.0.0.1:13378"]
   -c, --container  Docker mode - name of the Audiobookshelf Docker container
@@ -135,6 +135,9 @@ Options:
 ### username and password
 
 Your ABS username and password. The user must be a root type account (in most cases, it should be "root").
+
+It is recommended to use an environment variable `ABSWATCHER_PASSWORD` to set the password, rather than
+passing this over the command line (where it is recorded to `.bash_history`).
 
 ### server
 
@@ -152,4 +155,4 @@ Local=Remote folder pairs (comma-separated) to define how local paths map to rem
 
 Linux users can use the `init` system which comes with their distribution to run the program at startup.
 
-Windows users can use [nssm](https://github.com/kirillkovalenko/nssm) to create a service that points to the compiled binary in `/dist`
+Windows users can use [nssm](https://github.com/kirillkovalenko/nssm) to create a service that points to the compiled binary in `/dist`. Note that nssm has the ability to set environment variables.
