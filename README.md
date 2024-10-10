@@ -147,3 +147,9 @@ The name of your ABS Docker container (defaults to "audiobookshelf-audiobookshel
 ### path-mappings
 
 Local=Remote folder pairs (comma-separated) to define how local paths map to remote paths in the Docker container.
+
+## Running automatically
+
+Linux users can use the `init` system which comes with their distribution to run the program at startup.
+
+Windows users can use [nssm](https://github.com/kirillkovalenko/nssm) to create a service that points to the compiled binary in `/dist`
